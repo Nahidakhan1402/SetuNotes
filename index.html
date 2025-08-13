@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudyFlow - NCERT Books & Advanced Note Taking</title>
+    <meta name="description" content="Access comprehensive NCERT books, solved papers, and take advanced notes with our Samsung Notes-like interface">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="white" stroke-width="0.1" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(1deg); }
+        }
+
+        .hero-content {
+            text-align: center;
+            color: white;
+            z-index: 2;
+            position: relative;
+            max-width: 1200px;
+            padding: 0 2rem;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #fff, #e0e7ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            opacity: 0.8;
+            animation: fadeInUp 1s ease-out 0.4s both;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+            color: white;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Features Section */
+        .features {
+            padding: 6rem 0;
+            background: linear-gradient(180deg, #f8fafc 0%, #e2e8f0 100%);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #4a5568;
+            margin-bottom: 4rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+        }
+
+        .feature-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #2d3748;
+        }
+
+        .feature-description {
+            color: #4a5568;
+            line-height: 1.7;
+        }
+
+        /* App Preview Section */
+        .app-preview {
+            padding: 6rem 0;
+            background: #1a202c;
+            color: white;
+        }
+
+        .preview-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .preview-text h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(45deg, #fff, #e2e8f0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .preview-text p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            opacity: 0.8;
+            line-height: 1.7;
+        }
+
+        .preview-features {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .preview-features li {
+            padding: 0.5rem 0;
+            display: flex;
+            align-items: center;
+            opacity: 0.9;
+        }
+
+        .preview-features li::before {
+            content: '✓';
+            color: #48bb78;
+            font-weight: bold;
+            margin-right: 1rem;
+            width: 20px;
+        }
+
+        .app-mockup {
+            position: relative;
+            text-align: center;
+        }
+
+        .phone-frame {
+            width: 300px;
+            height: 600px;
+            background: #2d3748;
+            border-radius: 40px;
+            padding: 20px;
+            margin: 0 auto;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+        }
+
+        .phone-screen {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 30px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            text-align: center;
+        }
+
+        .screen-content {
+            padding: 2rem;
+        }
+
+        /* Stats Section */
+        .stats {
+            padding: 4rem 0;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .stat-item h3 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-item p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* Download Section */
+        .download {
+            padding: 6rem 0;
+            background: #f7fafc;
+            text-align: center;
+        }
+
+        .download h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 1rem;
+        }
+
+        .download p {
+            font-size: 1.2rem;
+            color: #4a5568;
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .download-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            background: #2d3748;
+            color: white;
+            text-decoration: none;
+            border-radius: 15px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .download-btn:hover {
+            background: #4a5568;
+            transform: translateY(-3px);
+        }
+
+        /* Footer */
+        .footer {
+            background: #1a202c;
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-section a {
+            color: #a0aec0;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: #667eea;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #2d3748;
+            padding-top: 2rem;
+            color: #a0aec0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .preview-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .phone-frame {
+                width: 250px;
+                height: 500px;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .download-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Loading animation for interactive elements */
+        .loading {
+            opacity: 0;
+            animation: fadeIn 0.6s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>StudyFlow</h1>
+            <p class="hero-subtitle">Your Complete NCERT Study Companion</p>
+            <p class="hero-description">
+                Access comprehensive NCERT books, solved exam papers, and take advanced notes with our intuitive Samsung Notes-like interface. Everything you need for academic success in one powerful app.
+            </p>
+            <div class="cta-buttons">
+                <a href="#download" class="btn btn-primary">Download Now</a>
+                <a href="#features" class="btn btn-secondary">Learn More</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <h2 class="section-title">Why Choose StudyFlow?</h2>
+            <p class="section-subtitle">
+                Combining the best of digital learning with advanced note-taking capabilities
+            </p>
+            
+            <div class="features-grid">
+                <div class="feature-card loading">
+                    <div class="feature-icon">📚</div>
+                    <h3 class="feature-title">Complete NCERT Library</h3>
+                    <p class="feature-description">
+                        Access all NCERT books from Class 1-12 across all subjects. Offline reading with high-quality PDFs and instant search functionality.
+                    </p>
+                </div>
+                
+                <div class="feature-card loading">
+                    <div class="feature-icon">🎯</div>
+                    <h3 class="feature-title">Solved Papers</h3>
+                    <p class="feature-description">
+                        Comprehensive collection of solved exam papers, previous year questions, and sample papers with detailed explanations.
+                    </p>
+                </div>
+                
+                <div class="feature-card loading">
+                    <div class="feature-icon">✍️</div>
+                    <h3 class="feature-title">Advanced Note Taking</h3>
+                    <p class="feature-description">
+                        Samsung Notes-like interface with handwriting recognition, drawing tools, text formatting, and multimedia support.
+                    </p>
+                </div>
+                
+                <div class="feature-card loading">
+                    <div class="feature-icon">🔄</div>
+                    <h3 class="feature-title">Smart Sync</h3>
+                    <p class="feature-description">
+                        Seamlessly sync your notes across devices. Never lose your work with automatic cloud backup and restore.
+                    </p>
+                </div>
+                
+                <div class="feature-card loading">
+                    <div class="feature-icon">🎨</div>
+                    <h3 class="feature-title">Rich Media Support</h3>
+                    <p class="feature-description">
+                        Add images, audio recordings, and drawings to your notes. Create comprehensive study materials with multimedia content.
+                    </p>
+                </div>
+                
+                <div class="feature-card loading">
+                    <div class="feature-icon">🔍</div>
+                    <h3 class="feature-title">Intelligent Search</h3>
+                    <p class="feature-description">
+                        Find any content instantly with AI-powered search across books, notes, and solved papers. OCR support for handwritten notes.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- App Preview Section -->
+    <section class="app-preview">
+        <div class="container">
+            <div class="preview-content">
+                <div class="preview-text">
+                    <h2>Experience Next-Level Learning</h2>
+                    <p>
+                        StudyFlow transforms how you interact with NCERT content. Our advanced note-taking system rivals Samsung Notes with intuitive gestures, pressure-sensitive writing, and seamless PDF annotation.
+                    </p>
+                    
+                    <ul class="preview-features">
+                        <li>Handwriting recognition with 99% accuracy</li>
+                        <li>Pressure-sensitive drawing and writing</li>
+                        <li>PDF annotation with highlighting and bookmarks</li>
+                        <li>Voice notes and audio recordings</li>
+                        <li>Collaborative study groups</li>
+                        <li>Progress tracking and analytics</li>
+                    </ul>
+                    
+                    <a href="#download" class="btn btn-primary">Get Started Today</a>
+                </div>
+                
+                <div class="app-mockup">
+                    <div class="phone-frame">
+                        <div class="phone-screen">
+                            <div class="screen-content">
+                                <h3>📖 NCERT Books</h3>
+                                <p>Class 1-12 • All Subjects</p>
+                                <br>
+                                <h3>📝 Smart Notes</h3>
+                                <p>Advanced Writing Tools</p>
+                                <br>
+                                <h3>🎯 Solved Papers</h3>
+                                <p>Comprehensive Solutions</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <h3>500+</h3>
+                    <p>NCERT Books</p>
+                </div>
+                <div class="stat-item">
+                    <h3>10,000+</h3>
+                    <p>Solved Papers</p>
+                </div>
+                <div class="stat-item">
+                    <h3>100K+</h3>
+                    <p>Happy Students</p>
+                </div>
+                <div class="stat-item">
+                    <h3>4.9⭐</h3>
+                    <p>App Rating</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Download Section -->
+    <section class="download" id="download">
+        <div class="container">
+            <h2>Ready to Transform Your Learning?</h2>
+            <p>
+                Join thousands of students who've already upgraded their study experience with StudyFlow. Download now and start your journey to academic excellence.
+            </p>
+            
+            <div class="download-buttons">
+                <a href="#" class="download-btn">
+                    📱 Download for Android
+                </a>
+                <a href="#" class="download-btn">
+                    🍎 Download for iOS
+                </a>
+                <a href="#" class="download-btn">
+                    💻 Try Web Version
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>StudyFlow</h3>
+                    <p>Empowering students with comprehensive NCERT resources and advanced note-taking capabilities.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <a href="#features">Features</a>
+                    <a href="#download">Download</a>
+                    <a href="#">Support</a>
+                    <a href="#">Privacy Policy</a>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Resources</h3>
+                    <a href="#">NCERT Books</a>
+                    <a href="#">Solved Papers</a>
+                    <a href="#">Study Guides</a>
+                    <a href="#">Blog</a>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Connect</h3>
+                    <a href="#">Contact Us</a>
+                    <a href="#">Community</a>
+                    <a href="#">Social Media</a>
+                    <a href="#">Newsletter</a>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 StudyFlow. All rights reserved. Made with ❤️ for students.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth reveal animation for feature cards
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all loading elements
+        document.querySelectorAll('.loading').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.6s ease-out';
+            observer.observe(el);
+        });
+
+        // Add floating animation to phone mockup
+        const phoneMockup = document.querySelector('.phone-frame');
+        if (phoneMockup) {
+            setInterval(() => {
+                phoneMockup.style.transform = `translateY(${Math.sin(Date.now() / 1000) * 5}px)`;
+            }, 16);
+        }
+
+        // Add hover effect to CTA buttons
+        document.querySelectorAll('.btn').forEach(btn => {
+            btn.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-3px) scale(1.05)';
+            });
+            
+            btn.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Counter animation for stats
+        const animateCounter = (element, target) => {
+            let current = 0;
+            const increment = target / 100;
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    element.textContent = target.toString().includes('K') ? target : Math.ceil(target);
+                    clearInterval(timer);
+                } else {
+                    element.textContent = Math.ceil(current);
+                }
+            }, 20);
+        };
+
+        // Trigger counter animation when stats section is visible
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    document.querySelectorAll('.stat-item h3').forEach(stat => {
+                        const text = stat.textContent;
+                        const number = parseInt(text.replace(/\D/g, ''));
+                        if (number && !isNaN(number)) {
+                            stat.textContent = '0';
+                            setTimeout(() => animateCounter(stat, number), 200);
+                        }
+                    });
+                    statsObserver.unobserve(entry.target);
+                }
+            });
+        });
+
+        const statsSection = document.querySelector('.stats');
+        if (statsSection) {
+            statsObserver.observe(statsSection);
+        }
+    </script>
+</body>
+              </html>
